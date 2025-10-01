@@ -206,10 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to send email using EmailJS
         async function sendEmail(name, email, subject, message) {
-            // EmailJS configuration - Replace these with your actual values
-            const serviceID = 'service_henry_portfolio'; // Replace with your EmailJS service ID
-            const templateID = 'template_contact_form'; // Replace with your EmailJS template ID
-            const publicKey = 'YOUR_EMAILJS_PUBLIC_KEY'; // Replace with your EmailJS public key
+            const serviceID = 'service_9ab9evi';
+            const templateID = 'template_5g65opl';
+            const publicKey = 'tXQXJd8zsbEz4DZhq';
             
             // Initialize EmailJS
             emailjs.init(publicKey);
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 from_email: email,
                 subject: subject,
                 message: message,
-                to_email: 'henry.zheng@example.com' // Replace with your actual email address
+                to_email: 'zhengjiahuan123@gmail.com'
             };
             
             try {
