@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border-radius: 8px;
             display: none;
         `;
-        successMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+        successMessage.textContent = 'Message sent successfully.';
         
         // Insert success message after the form
         contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
@@ -218,9 +218,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 from_name: name,
                 from_email: email,
                 to_name: 'Henry Zheng',
-                subject: subject,
+                to_email: 'zhengjiahuan123@gmail.com',
+                subject: `Portfolio Contact: ${subject}`,
                 message: message,
-                reply_to: email
+                reply_to: email,
+                user_name: name,
+                user_email: email
             };
             
             console.log('Sending email with parameters:', templateParams);
