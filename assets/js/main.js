@@ -213,14 +213,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Initialize EmailJS
             emailjs.init(publicKey);
             
-            // Prepare template parameters
+            // Prepare template parameters - using standard EmailJS parameter names
             const templateParams = {
                 from_name: name,
                 from_email: email,
+                to_name: 'Henry Zheng',
                 subject: subject,
                 message: message,
-                to_email: 'zhengjiahuan123@gmail.com'
+                reply_to: email
             };
+            
+            console.log('Sending email with parameters:', templateParams);
             
             try {
                 // Send email using EmailJS
@@ -228,7 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Email sent successfully:', response);
                 return response;
             } catch (error) {
-                console.error('EmailJS error:', error);
+                console.error('EmailJS error details:', error);
+                console.error('Error status:', error.status);
+                console.error('Error text:', error.text);
                 throw error;
             }
         }
