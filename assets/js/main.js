@@ -106,6 +106,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form submission handling
     const contactForm = document.querySelector('.form');
     if (contactForm) {
+        // Create success message element
+        const successMessage = document.createElement('div');
+        successMessage.className = 'success-message';
+        successMessage.style.cssText = `
+            color: #10b981;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            display: none;
+        `;
+        successMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+        
+        // Insert success message after the form
+        contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -118,21 +136,103 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Simple validation
             if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields.');
+                showErrorMessage('Please fill in all fields.');
                 return;
             }
 
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
+                showErrorMessage('Please enter a valid email address.');
                 return;
             }
 
-            // Simulate form submission (replace with actual form handling)
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            this.reset();
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            // Send email using EmailJS
+            sendEmail(name, email, subject, message)
+                .then(() => {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    this.reset();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                })
+                .catch((error) => {
+                    console.error('Error sending email:', error);
+                    showErrorMessage('Sorry, there was an error sending your message. Please try again.');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
         });
+
+        // Function to show error messages
+        function showErrorMessage(message) {
+            // Remove any existing error messages
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.style.cssText = `
+                color: #ef4444;
+                font-size: 0.9rem;
+                margin-top: 1rem;
+                padding: 0.5rem 1rem;
+                background: #fef2f2;
+                border: 1px solid #fecaca;
+                border-radius: 8px;
+            `;
+            errorMessage.textContent = message;
+            
+            contactForm.parentNode.insertBefore(errorMessage, contactForm.nextSibling);
+            
+            // Hide error message after 5 seconds
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 5000);
+        }
+
+        // Function to send email using EmailJS
+        async function sendEmail(name, email, subject, message) {
+            // EmailJS configuration - Replace these with your actual values
+            const serviceID = 'service_henry_portfolio'; // Replace with your EmailJS service ID
+            const templateID = 'template_contact_form'; // Replace with your EmailJS template ID
+            const publicKey = 'YOUR_EMAILJS_PUBLIC_KEY'; // Replace with your EmailJS public key
+            
+            // Initialize EmailJS
+            emailjs.init(publicKey);
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: 'henry.zheng@example.com' // Replace with your actual email address
+            };
+            
+            try {
+                // Send email using EmailJS
+                const response = await emailjs.send(serviceID, templateID, templateParams);
+                console.log('Email sent successfully:', response);
+                return response;
+            } catch (error) {
+                console.error('EmailJS error:', error);
+                throw error;
+            }
+        }
     }
 
     // Parallax effect for hero section
