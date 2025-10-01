@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Function to send email using EmailJS
         async function sendEmail(name, email, subject, message) {
             const serviceID = 'service_9ab9evi';
-            const templateID = 'template_5g65opl';
+            const templateID = 'template_l2jsjiv';
             const publicKey = 'tXQXJd8zsbEz4DZhq';
             
             // Initialize EmailJS
