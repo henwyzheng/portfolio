@@ -217,9 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const templateParams = {
                 from_name: name,
                 from_email: email,
-                to_name: 'Henry Zheng',
-                to_email: 'zhengjiahuan123@gmail.com',
-                subject: `Portfolio Contact: ${subject}`,
+                subject: subject,
                 message: message,
                 reply_to: email,
                 user_name: name,
