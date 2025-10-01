@@ -147,6 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // reCAPTCHA validation
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                showErrorMessage('Please complete the reCAPTCHA verification.');
+                return;
+            }
+
             // Show loading state
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
@@ -154,11 +161,12 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
 
             // Send email using EmailJS
-            sendEmail(name, email, subject, message)
+            sendEmail(name, email, subject, message, recaptchaResponse)
                 .then(() => {
                     // Show success message
                     successMessage.style.display = 'block';
                     this.reset();
+                    grecaptcha.reset(); // Reset reCAPTCHA
                     submitButton.textContent = originalText;
                     submitButton.disabled = false;
                     
@@ -205,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Function to send email using EmailJS
-        async function sendEmail(name, email, subject, message) {
+        async function sendEmail(name, email, subject, message, recaptchaResponse) {
             const serviceID = 'service_9ab9evi';
             const templateID = 'template_l2jsjiv';
             const publicKey = 'tXQXJd8zsbEz4DZhq';
@@ -227,6 +235,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Sending email with parameters:', templateParams);
             
             try {
+                // Verify reCAPTCHA server-side (optional but recommended)
+                // For now, we'll just log it - in production you might want to verify with Google's API
+                console.log('reCAPTCHA response:', recaptchaResponse);
+                
                 // Send email using EmailJS
                 const response = await emailjs.send(serviceID, templateID, templateParams);
                 console.log('Email sent successfully:', response);

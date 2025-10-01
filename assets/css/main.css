@@ -668,6 +668,18 @@ section {
     border-radius: 15px;
 }
 
+/* reCAPTCHA Styling */
+.g-recaptcha {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.g-recaptcha > div {
+    transform: scale(0.9);
+    transform-origin: 0 0;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
