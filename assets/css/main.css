@@ -853,3 +853,83 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: #1d4ed8;
 }
+
+/* Project page (e.g. RAVC) */
+.project-page-content {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+.project-page .back-link {
+    margin-bottom: 1.5rem;
+}
+.project-page .back-link a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.project-page .back-link a:hover {
+    text-decoration: underline;
+}
+.project-page-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.project-page-intro {
+    color: #64748b;
+    margin-bottom: 2.5rem;
+}
+.project-page-hero-image {
+    margin-bottom: 2.5rem;
+}
+.project-page-hero-image img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+.media-section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.media-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 900px;
+}
+.media-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.media-item video,
+.media-item img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+.media-caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+.media-placeholder {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.media-placeholder-inner {
+    text-align: center;
+    color: #94a3b8;
+    padding: 1.5rem;
+}
+.media-placeholder-inner i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.media-placeholder-hint {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
