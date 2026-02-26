@@ -896,6 +896,18 @@ html {
     gap: 2rem;
     max-width: 900px;
 }
+.media-grid-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.media-grid-row .media-item {
+    flex: 1 1 45%;
+}
+@media (max-width: 768px) {
+    .media-grid-row .media-item {
+        flex: 1 1 100%;
+    }
+}
 .media-title {
     font-weight: bold;
     margin-bottom: 0.5rem;
