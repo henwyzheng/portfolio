@@ -894,14 +894,13 @@ html {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 900px;
 }
 .media-grid-row {
     flex-direction: row;
     flex-wrap: wrap;
 }
 .media-grid-row .media-item {
-    flex: 1 1 45%;
+    flex: 1 1 30%;
 }
 @media (max-width: 768px) {
     .media-grid-row .media-item {
