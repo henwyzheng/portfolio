@@ -898,6 +898,7 @@ html {
 .media-grid-row {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 .media-grid-row .media-item {
     flex: 1 1 30%;
@@ -917,6 +918,11 @@ html {
     width: 100%;
     max-width: 400px;
     border-radius: 8px;
+}
+.media-grid-row .media-item video {
+    max-height: 250px;
+    object-fit: contain;
+    background: transparent;
 }
 .media-caption {
     margin-top: 0.5rem;
